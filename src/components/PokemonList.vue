@@ -1,0 +1,32 @@
+<template>
+  <div class="row">
+    <div class="col col-md-3" v-for="(pokemon, key) in pokemons" :key="key">
+      <PokemonCard
+        :thumbnailUrl="pokemon.thumbnailUrl"
+        :id="pokemon.id"
+        :name="pokemon.name"
+        :abilities="pokemon.abilities"
+      />
+    </div>
+  </div>
+</template>
+
+<script lang="ts">
+import PokemonCard from 'components/PokemonCard.vue';
+import { defineComponent, PropType } from 'vue';
+import { PokemonProps } from '../store/pokemons/state';
+
+export default defineComponent({
+  name: 'PokemonList',
+  components: { PokemonCard },
+  props: {
+    pokemons: {
+      type: Array as PropType<PokemonProps[]>,
+      required: true,
+    },
+  },
+  setup(props) {
+    return { props };
+  },
+});
+</script>

@@ -1,17 +1,28 @@
 import { RouteRecordRaw } from 'vue-router';
+import MainLayout from 'layouts/MainLayout.vue';
+import PokemonLayout from 'layouts/PokemonLayout.vue';
+import Pokemon from 'pages/Pokemon.vue';
+import Index from 'pages/Index.vue';
+import Error404 from 'pages/Error404.vue';
 
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    component: () => import('layouts/MainLayout.vue'),
-    children: [{ path: '', component: () => import('pages/Index.vue') }],
+    component: () => MainLayout,
+    children: [{ path: '', component: () => Index }],
+  },
+
+  {
+    path: '/pokemon',
+    component: () => PokemonLayout,
+    children: [{ path: '', component: () => Pokemon }],
   },
 
   // Always leave this as last one,
   // but you can also remove it
   {
     path: '/:catchAll(.*)*',
-    component: () => import('pages/Error404.vue'),
+    component: () => Error404,
   },
 ];
 
