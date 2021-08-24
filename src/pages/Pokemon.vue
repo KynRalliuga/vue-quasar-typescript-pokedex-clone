@@ -9,7 +9,7 @@
 
 <script lang="ts">
 import PokemonList from 'components/PokemonList.vue';
-import { mapGetters, mapActions } from 'vuex';
+import { mapGetters } from 'vuex';
 import { useStore } from 'src/store';
 
 export default {
@@ -17,9 +17,6 @@ export default {
   components: { PokemonList },
   computed: {
     ...mapGetters('PokemonsModule', ['allPokemons']),
-  },
-  methods: {
-    ...mapActions('PokemonsModule', ['getPokemons']),
   },
   mounted() {
     const $store = useStore();

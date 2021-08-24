@@ -1,34 +1,27 @@
-import { AxiosResponse } from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { api } from 'boot/axios';
 import { ActionTree } from 'vuex';
 import { StateInterface } from '../index';
-import { PokemonProps, PokemonsStateProps } from './state';
-
-interface PokemonsApi {
-  results: {
-    name: string;
-    url: string;
-  }[];
-}
+import { PokemonsStateProps, PokemonsApi, PokemonSpecificApi } from './state';
 
 const actions: ActionTree<PokemonsStateProps, StateInterface> = {
   getPokemons({ commit }) {
     api
       .get('/pokemon/')
       .then((response: AxiosResponse<PokemonsApi>) => {
-        const pokemons: PokemonProps[] = [];
-        response.data.results.forEach((pokemon, key) => {
-          pokemons.push({
-            name: pokemon.name,
-            id: key,
-            thumbnailUrl: '',
-            abilities: [],
-          });
+        response.data.results.forEach((pokemon) => {
+          axios
+            .get(pokemon.url)
+            .then((response: AxiosResponse<PokemonSpecificApi>) => {
+              commit('addPokemons', response.data);
+            })
+            .catch(function () {
+              // commit('setPokemons', []);
+            });
         });
-        commit('setPokemons', pokemons);
       })
       .catch(function () {
-        commit('setPokemons', []);
+        // commit('addPokemons', []);
       });
   },
 };

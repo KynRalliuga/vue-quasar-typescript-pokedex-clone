@@ -5,9 +5,9 @@
     </div>
     <div class="id">{{ id }}</div>
     <div class="name">{{ name }}</div>
-    <div class="abilities">
-      <span class="ability" v-for="(ability, key) in abilities" :key="key">
-        {{ ability }}
+    <div class="types">
+      <span class="type" v-for="(type, key) in types" :key="key">
+        {{ type }}
       </span>
     </div>
   </div>
@@ -33,7 +33,7 @@ export default defineComponent({
       type: String,
       required: true,
     },
-    abilities: {
+    types: {
       type: Array,
       required: true,
     },

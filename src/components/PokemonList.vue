@@ -5,7 +5,7 @@
         :thumbnailUrl="pokemon.thumbnailUrl"
         :id="pokemon.id"
         :name="pokemon.name"
-        :abilities="pokemon.abilities"
+        :types="pokemon.types"
       />
     </div>
   </div>
