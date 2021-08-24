@@ -1,13 +1,15 @@
 <template>
   <div class="card">
     <div class="thumbnail">
-      <img :src="thumbnailUrl" alt="" />
+      <img :src="pokemon.thumbnailUrl" alt="" />
     </div>
-    <div class="id">{{ id }}</div>
-    <div class="name">{{ name }}</div>
+    <div class="id">{{ `Nº${pokemon.id.toString().padStart(3, '0')}` }}</div>
+    <div class="name">
+      {{ `${pokemon.name[0].toUpperCase()}${pokemon.name.substring(1)}` }}
+    </div>
     <div class="types">
-      <span class="type" v-for="(type, key) in types" :key="key">
-        {{ type }}
+      <span class="type" v-for="(type, key) in pokemon.types" :key="key">
+        {{ `${type[0].toUpperCase()}${type.substring(1)}` }}
       </span>
     </div>
   </div>
@@ -16,25 +18,14 @@
 <style scoped></style>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, PropType } from 'vue';
+import { PokemonProps } from '../store/pokemons/state';
 
 export default defineComponent({
   name: 'PokemonCard',
   props: {
-    id: {
-      type: Number,
-      required: true,
-    },
-    thumbnailUrl: {
-      type: String,
-      required: true,
-    },
-    name: {
-      type: String,
-      required: true,
-    },
-    types: {
-      type: Array,
+    pokemon: {
+      type: Object as PropType<PokemonProps>,
       required: true,
     },
   },

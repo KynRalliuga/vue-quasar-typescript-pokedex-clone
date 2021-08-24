@@ -1,12 +1,7 @@
 <template>
   <div class="row">
     <div class="col col-md-3" v-for="(pokemon, key) in pokemons" :key="key">
-      <PokemonCard
-        :thumbnailUrl="pokemon.thumbnailUrl"
-        :id="pokemon.id"
-        :name="pokemon.name"
-        :types="pokemon.types"
-      />
+      <PokemonCard :pokemon="pokemon" />
     </div>
   </div>
 </template>
