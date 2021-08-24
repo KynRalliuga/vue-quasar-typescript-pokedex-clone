@@ -6,15 +6,15 @@ import Error404 from 'pages/Error404.vue';
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    component: () => PokemonLayout,
-    children: [{ path: '', component: () => Pokemon }],
+    component: PokemonLayout,
+    children: [{ path: '', component: Pokemon }],
   },
 
   // Always leave this as last one,
   // but you can also remove it
   {
     path: '/:catchAll(.*)*',
-    component: () => Error404,
+    component: Error404,
   },
 ];
 
