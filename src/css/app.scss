@@ -1,7 +1,14 @@
 // app global css in SCSS form
 .container {
   max-width: 100%;
-  width: 1140px;
+  width: 915px;
+  padding-left: 20px;
+  padding-right: 20px;
   margin-right: auto;
   margin-left: auto;
+}
+@media (max-width: 992px) {
+  .container {
+    width: 440px;
+  }
 }

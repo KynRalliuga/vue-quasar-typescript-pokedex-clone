@@ -1,29 +1,35 @@
 <template>
   <div class="card">
-    <div class="thumbnail">
-      <img :src="pokemon.thumbnailUrl" alt="" />
-    </div>
-    <div class="id">{{ `Nº${pokemon.id.toString().padStart(3, '0')}` }}</div>
-    <div class="name">
-      <h5>
-        {{ `${pokemon.name[0].toUpperCase()}${pokemon.name.substring(1)}` }}
-      </h5>
-    </div>
-    <div class="types">
-      <span
-        :class="`type background-color-${type.toLocaleLowerCase()}`"
-        v-for="(type, key) in pokemon.types"
-        :key="key"
-      >
-        {{ `${type[0].toUpperCase()}${type.substring(1)}` }}
-      </span>
-    </div>
+    <router-link class="link" :to="pokemon.path">
+      <div class="thumbnail">
+        <img :src="pokemon.thumbnailUrl" alt="" />
+      </div>
+      <div class="id">{{ `Nº${pokemon.id.toString().padStart(3, '0')}` }}</div>
+      <div class="name">
+        <h5>
+          {{ `${pokemon.name[0].toUpperCase()}${pokemon.name.substring(1)}` }}
+        </h5>
+      </div>
+      <div class="types">
+        <span
+          :class="`type background-color-${type.toLocaleLowerCase()}`"
+          v-for="(type, key) in pokemon.types"
+          :key="key"
+        >
+          {{ `${type[0].toUpperCase()}${type.substring(1)}` }}
+        </span>
+      </div>
+    </router-link>
   </div>
 </template>
 
 <style scoped>
 .card {
   padding: 30px 20px;
+}
+.link {
+  text-decoration: none !important;
+  cursor: pointer;
 }
 .thumbnail {
   background-color: #f2f2f2;
@@ -229,10 +235,10 @@
 </style>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue';
+import { PropType } from 'vue';
 import { PokemonProps } from '../store/pokemons/state';
 
-export default defineComponent({
+export default {
   name: 'PokemonCard',
   props: {
     pokemon: {
@@ -240,8 +246,5 @@ export default defineComponent({
       required: true,
     },
   },
-  setup(props) {
-    return { props };
-  },
-});
+};
 </script>

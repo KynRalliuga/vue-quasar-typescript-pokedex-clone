@@ -3,6 +3,7 @@ export interface PokemonsApi {
     name: string;
     url: string;
   }[];
+  next: string;
 }
 
 export interface PokemonSpecificApi {
@@ -49,15 +50,24 @@ export interface PokemonProps {
   id: number;
   name: string;
   types: string[];
+  path: string;
 }
 
 export interface PokemonsStateProps {
   pokemons: PokemonProps[];
+  isActiveLoadMore: boolean;
+  isLoading: boolean;
+  endPokemons: boolean;
+  nextPagePokemons: string;
 }
 
 function state(): PokemonsStateProps {
   return {
     pokemons: [],
+    isActiveLoadMore: false,
+    isLoading: false,
+    endPokemons: false,
+    nextPagePokemons: '/pokemon/',
   };
 }
 
