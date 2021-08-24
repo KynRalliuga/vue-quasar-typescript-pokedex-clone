@@ -6,6 +6,13 @@
   </div>
 </template>
 
+<style scoped>
+.row {
+  margin-left: -20px;
+  margin-right: -20px;
+}
+</style>
+
 <script lang="ts">
 import PokemonCard from 'components/PokemonCard.vue';
 import { defineComponent, PropType } from 'vue';
