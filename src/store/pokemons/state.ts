@@ -43,6 +43,7 @@ export interface PokemonSpecificApi {
       url: string;
     };
   }[];
+  weight: number;
 }
 
 export interface PokemonProps {
@@ -53,12 +54,44 @@ export interface PokemonProps {
   path: string;
 }
 
+export interface PokemonFlavorTextProps {
+  flavor_text: string;
+  language: {
+    name: string;
+  };
+  version: {
+    name: string;
+  };
+}
+
+export interface PokemonSpecificSpeciesProps {
+  flavor_text_entries: PokemonFlavorTextProps[];
+  genera: {
+    genus: string;
+  }[];
+}
+
+export interface PokemonGenderProps {
+  name: string;
+}
+
+export interface PokemonGenderApis {
+  results: PokemonGenderProps[];
+}
+
+export interface PokemonSpecificProps {
+  generalInfo: PokemonSpecificApi | null;
+  speciesInfo: PokemonSpecificSpeciesProps | null;
+  gendersInfo: PokemonGenderProps[];
+}
+
 export interface PokemonsStateProps {
   pokemons: PokemonProps[];
   isActiveLoadMore: boolean;
   isLoading: boolean;
   endPokemons: boolean;
   nextPagePokemons: string;
+  pokemonSpecific: PokemonSpecificProps;
 }
 
 function state(): PokemonsStateProps {
@@ -68,6 +101,11 @@ function state(): PokemonsStateProps {
     isLoading: false,
     endPokemons: false,
     nextPagePokemons: '/pokemon/',
+    pokemonSpecific: {
+      generalInfo: null,
+      speciesInfo: null,
+      gendersInfo: [],
+    },
   };
 }
 

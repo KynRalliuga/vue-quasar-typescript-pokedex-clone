@@ -1,17 +1,10 @@
 <template>
-  <div class="row">
+  <div class="row q-col-gutter-lg">
     <div class="col-12 col-md-3" v-for="(pokemon, key) in pokemons" :key="key">
       <PokemonCard :pokemon="pokemon" />
     </div>
   </div>
 </template>
-
-<style scoped>
-.row {
-  margin-left: -20px;
-  margin-right: -20px;
-}
-</style>
 
 <script lang="ts">
 import PokemonCard from 'components/PokemonCard.vue';

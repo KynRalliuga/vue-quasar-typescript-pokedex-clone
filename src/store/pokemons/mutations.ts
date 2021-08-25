@@ -1,5 +1,10 @@
 import { MutationTree } from 'vuex';
-import { PokemonsStateProps, PokemonSpecificApi } from './state';
+import {
+  PokemonsStateProps,
+  PokemonSpecificApi,
+  PokemonSpecificSpeciesProps,
+  PokemonGenderProps,
+} from './state';
 
 const mutation: MutationTree<PokemonsStateProps> = {
   addPokemons(state: PokemonsStateProps, pokemon: PokemonSpecificApi) {
@@ -47,6 +52,31 @@ const mutation: MutationTree<PokemonsStateProps> = {
   },
   activeEndPokemons(state: PokemonsStateProps) {
     state.endPokemons = true;
+  },
+  setPokemonSpecificGeneralInfo(
+    state: PokemonsStateProps,
+    pokemon: PokemonSpecificApi
+  ) {
+    state.pokemonSpecific.generalInfo = pokemon;
+  },
+  setPokemonSpecificSpeciesInfo(
+    state: PokemonsStateProps,
+    pokemon: PokemonSpecificSpeciesProps
+  ) {
+    state.pokemonSpecific.speciesInfo = pokemon;
+  },
+  setPokemonSpecificGenderInfo(
+    state: PokemonsStateProps,
+    pokemon: PokemonGenderProps[]
+  ) {
+    state.pokemonSpecific.gendersInfo = pokemon;
+  },
+  clearPokemonSpecific(state: PokemonsStateProps) {
+    state.pokemonSpecific = {
+      generalInfo: null,
+      speciesInfo: null,
+      gendersInfo: [],
+    };
   },
 };
 

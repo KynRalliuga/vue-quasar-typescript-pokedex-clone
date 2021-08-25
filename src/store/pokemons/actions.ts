@@ -2,13 +2,23 @@ import axios, { AxiosResponse } from 'axios';
 import { api } from 'boot/axios';
 import { ActionTree } from 'vuex';
 import { StateInterface } from '../index';
-import { PokemonsStateProps, PokemonsApi, PokemonSpecificApi } from './state';
+import {
+  PokemonsStateProps,
+  PokemonsApi,
+  PokemonSpecificApi,
+  PokemonSpecificSpeciesProps,
+  PokemonGenderApis,
+} from './state';
 import { debounce } from 'quasar';
 
 interface payloadGetPokemons {
   idx: number;
   // eslint-disable-next-line @typescript-eslint/ban-types
   done: Function;
+}
+
+interface payloadGetPokemon {
+  name: string;
 }
 
 const actions: ActionTree<PokemonsStateProps, StateInterface> = {
@@ -55,6 +65,39 @@ const actions: ActionTree<PokemonsStateProps, StateInterface> = {
           // commit('addPokemons', []);
         });
     }
+  },
+  getPokemonSpecific({ commit }, payload: payloadGetPokemon) {
+    if (payload !== undefined) {
+      api
+        .get(`/pokemon/${payload.name}/`)
+        .then((response: AxiosResponse<PokemonSpecificApi>) => {
+          commit('setPokemonSpecificGeneralInfo', response.data);
+        })
+        .catch(function () {
+          commit('setPokemonSpecificGeneralInfo', null);
+        });
+
+      api
+        .get(`/pokemon-species/${payload.name}/`)
+        .then((response: AxiosResponse<PokemonSpecificSpeciesProps>) => {
+          commit('setPokemonSpecificSpeciesInfo', response.data);
+        })
+        .catch(function () {
+          commit('setPokemonSpecificSpeciesInfo', null);
+        });
+
+      api
+        .get(`/gender/?name=${payload.name}/`)
+        .then((response: AxiosResponse<PokemonGenderApis>) => {
+          commit('setPokemonSpecificGenderInfo', response.data.results);
+        })
+        .catch(function () {
+          commit('setPokemonSpecificGenderInfo', []);
+        });
+    }
+  },
+  resetPokemonSpecific({ commit }) {
+    commit('clearPokemonSpecific');
   },
   loadMorePokemons({ commit, dispatch }) {
     commit('activeLoadMore');

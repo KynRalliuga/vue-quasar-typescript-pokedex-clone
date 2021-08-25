@@ -1,7 +1,9 @@
 <template>
   <div class="container q-py-lg">
     <div class="row">
-      <div class="col col-md-12">Pokémons</div>
+      <div class="col col-md-12">
+        <h2>Pokémons</h2>
+      </div>
     </div>
     <div class="infinite-scroll-pokemons" ref="allPokemons">
       <q-infinite-scroll
